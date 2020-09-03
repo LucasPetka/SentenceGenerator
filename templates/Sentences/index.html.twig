@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Eneba Sentences {% endblock %}
+
+{% block body %}
+
+
+    <div class="text-center h4 mt-5"> {{ sentence }} </div>
+
+
+    <div class="container"> 
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
