@@ -48,5 +48,23 @@ class SentenceControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
 
+    public function testSentenceUrlUnique()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/');
+
+        $form = $crawler->selectButton('Save sentence')->form();
+
+        // set some values
+        $form['form[url]'] = 'randomtext789';
+
+        // submit the form
+        $crawler = $client->submit($form);
+
+        $this->assertSelectorTextContains('html body div.container form div#form div ul li', 'This value is already used');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
 
 }
